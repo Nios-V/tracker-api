@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/Nios-V/tracker-api/internal/models"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -25,4 +26,14 @@ func Connect() {
 	}
 
 	DB = gormDB
+
+	err = DB.AutoMigrate(
+		&models.Note{},
+		&models.Tag{},
+		&models.MediaTag{},
+		&models.NoteLink{},
+		&models.Experience{},
+		&models.Media{},
+		&models.Session{},
+	)
 }

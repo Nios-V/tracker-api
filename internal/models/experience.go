@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 type ExperienceStatus string
@@ -27,4 +28,5 @@ type Experience struct {
 	FinishedAt *time.Time       `gorm:"type:timestamp" json:"finished_at,omitempty"`
 	CreatedAt  time.Time        `gorm:"autoCreateTime" json:"created_at"`
 	UpdatedAt  time.Time        `gorm:"autoUpdateTime" json:"updated_at"`
+	DeletedAt  gorm.DeletedAt   `gorm:"index" json:"deleted_at,omitempty"`
 }
