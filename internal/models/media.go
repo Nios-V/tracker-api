@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"gorm.io/gorm"
+	"github.com/google/uuid"
 )
 
 type MediaType string
@@ -18,8 +18,7 @@ const (
 )
 
 type Media struct {
-	gorm.Model
-	ID        uint      `gorm:"primaryKey" json:"id"`
+	ID        uuid.UUID `gorm:"type:uuid;primaryKey;default:gen_random_uuid()" json:"id"`
 	Title     string    `gorm:"not null" json:"title"`
 	Type      MediaType `gorm:"not null" json:"type"`
 	CreatedAt time.Time `gorm:"autoCreateTime" json:"created_at"`

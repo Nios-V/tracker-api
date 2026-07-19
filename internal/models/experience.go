@@ -1,6 +1,10 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type ExperienceStatus string
 
@@ -13,9 +17,9 @@ const (
 )
 
 type Experience struct {
-	ID         uint             `gorm:"primaryKey" json:"id"`
-	UserID     uint             `gorm:"not null" json:"user_id"`
-	MediaID    uint             `gorm:"not null" json:"media_id"`
+	ID         uuid.UUID        `gorm:"type:uuid;primaryKey;default:gen_random_uuid()" json:"id"`
+	UserID     uuid.UUID        `gorm:"not null" json:"user_id"`
+	MediaID    uuid.UUID        `gorm:"not null" json:"media_id"`
 	Media      Media            `gorm:"foreignKey:MediaID" json:"media,omitempty"`
 	Status     ExperienceStatus `gorm:"not null" json:"status"`
 	Rating     *float32         `gorm:"type:decimal(2,1)" json:"rating,omitempty"`

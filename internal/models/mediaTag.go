@@ -1,8 +1,10 @@
 package models
 
+import "github.com/google/uuid"
+
 type MediaTag struct {
-	ID      uint `gorm:"primaryKey" json:"id"`
-	MediaID uint `gorm:"not null" json:"media_id"`
-	TagID   uint `gorm:"not null" json:"tag_id"`
-	Tag     Tag  `gorm:"foreignKey:TagID" json:"tag,omitempty"`
+	ID      uuid.UUID `gorm:"type:uuid;primaryKey;default:gen_random_uuid()" json:"id"`
+	MediaID uuid.UUID `gorm:"not null" json:"media_id"`
+	TagID   uuid.UUID `gorm:"not null" json:"tag_id"`
+	Tag     Tag       `gorm:"foreignKey:TagID" json:"tag,omitempty"`
 }

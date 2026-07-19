@@ -1,10 +1,14 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type Note struct {
-	ID           uint      `gorm:"primaryKey" json:"id"`
-	ExperienceID uint      `gorm:"not null" json:"experience_id"`
+	ID           uuid.UUID `gorm:"type:uuid;primaryKey;default:gen_random_uuid()" json:"id"`
+	ExperienceID uuid.UUID `gorm:"not null" json:"experience_id"`
 	Title        string    `gorm:"not null" json:"title"`
 	Content      string    `gorm:"type:text" json:"content"`
 	CreatedAt    time.Time `gorm:"autoCreateTime" json:"created_at"`
