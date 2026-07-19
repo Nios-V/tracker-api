@@ -2,22 +2,19 @@ package main
 
 import (
 	"github.com/Nios-V/tracker-api/internal/database"
+	"github.com/Nios-V/tracker-api/internal/handlers"
 	"github.com/Nios-V/tracker-api/internal/repository"
+	"github.com/Nios-V/tracker-api/internal/router"
 	"github.com/Nios-V/tracker-api/internal/services"
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	database.Connect()
 
 	repos := repository.NewRepositories(database.DB)
-	services := services.NewServices(repos)
+	svcs := services.NewServices(repos)
+	hdlrs := handlers.NewHandlers(svcs)
 
-	r := gin.Default()
-	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"status": "ok",
-		})
-	})
+	r := router.SetupRouter(hdlrs)
 	r.Run(":8080")
 }
