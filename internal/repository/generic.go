@@ -35,8 +35,8 @@ func (r *GenericRepository[T]) GetAll() ([]T, error) {
 	return entities, nil
 }
 
-func (r *GenericRepository[T]) Update(entity *T) error {
-	return r.db.Save(entity).Error
+func (r *GenericRepository[T]) Update(id uuid.UUID, entity *T) error {
+	return r.db.Model(new(T)).Where("id = ?", id).Updates(entity).Error
 }
 
 func (r *GenericRepository[T]) Delete(id uuid.UUID) error {

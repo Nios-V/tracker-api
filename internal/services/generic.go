@@ -25,8 +25,8 @@ func (s *GenericService[T]) GetAll() ([]T, error) {
 	return s.repo.GetAll()
 }
 
-func (s *GenericService[T]) Update(entity *T) error {
-	return s.repo.Update(entity)
+func (s *GenericService[T]) Update(id uuid.UUID, entity *T) error {
+	return s.repo.Update(id, entity)
 }
 
 func (s *GenericService[T]) Delete(id uuid.UUID) error {
